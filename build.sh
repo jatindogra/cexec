@@ -124,6 +124,14 @@ check_python() {
   fi
 }
 
+install_shipctl() {
+  if [ -f /root/node/shipctl/"$SHIPPABLE_NODE_ARCHITECTURE"/"$SHIPPABLE_NODE_OPERATING_SYSTEM"/install.sh ]; then
+    echo "Installing shipctl components"
+    /root/node/shipctl/"$SHIPPABLE_NODE_ARCHITECTURE"/"$SHIPPABLE_NODE_OPERATING_SYSTEM"/install.sh
+    echo "Finished installing shipctl components"
+  fi
+}
+
 update_dir() {
   cd $PROGDIR
 }
@@ -180,6 +188,7 @@ main() {
   check_git
   check_ssh_agent
   check_python
+  install_shipctl
   update_dir
   update_perms
   copy_bin_dir
